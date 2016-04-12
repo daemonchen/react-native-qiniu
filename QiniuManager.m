@@ -66,13 +66,21 @@ RCT_EXPORT_METHOD(uploadToQiniu:(NSString *)uri
   NSMutableDictionary *mutableDict = [params mutableCopy];
   [mutableDict setObject:mimeString forKey:@"x:mimeType"];
   params = [mutableDict mutableCopy];
-
+//  NSLog(@"----params: %@", params);
 
   self.opt = [[QNUploadOption alloc] initWithMime:mimeString progressHandler:nil params:params checkCrc:YES cancellationSignal:nil];
-
+//  NSLog(@"------qiniu opt: %@", self.opt);
   [upManager putData:data key:key token:token
             complete: ^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
-              callback(@[resp]);
+//              NSLog(@"-----update callback params:%@", resp);
+              if (resp == nil) {
+//                NSDictionary *res = [NSDictionary];
+                NSDictionary *res = @{@"status":@500, @"message": @"上传失败"};
+                callback(@[res]);
+              }else{
+                callback(@[resp]);
+              }
+
 
             } option: self.opt];
 

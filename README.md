@@ -1,10 +1,13 @@
 # react-native-qiniu
 react native qiniu
 
+### useage:
+
+add `QiniuManager.h` & `QiniuManager.m` to your project, and then in your react-native code use it like this:
+
+
 ```
-    var {
-        NativeModules
-    } = React
+    import React, { NativeModules } from 'react-native'
 
     var QiniuManager = NativeModules.QiniuManager;
 
@@ -17,3 +20,7 @@ react native qiniu
             callback(result);
         });
 ```
+
+author: 503802922 [scott chen](http://www.classical1988.com/)
+
+mail: cgyqqcgy@gmail.com
